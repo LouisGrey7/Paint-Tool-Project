@@ -1,5 +1,18 @@
 ﻿  CCanvas.cpp
+  CTools.cpp
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(53,52): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(53,41): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
   CWindow.cpp
   Main.cpp
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\Main.cpp(44,42): error C2660: 'CTools::SetLinePoints': function does not take 1 arguments
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.h(24,7): message : see declaration of 'CTools::SetLinePoints'
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\Main.cpp(45,13): error C2143: syntax error: missing ';' before 'break'
   Generating Code...
-  Paint Tool.vcxproj -> C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Debug\Paint Tool.exe

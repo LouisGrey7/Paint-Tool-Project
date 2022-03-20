@@ -10,20 +10,27 @@ private:
 	sf::RectangleShape* canvas;
 	float xVal = 1280;
 	float yVal = 720;
-	void initVariables();
-	void initCanvas();
+	void InitVariables();
+	void InitCanvas();
 
-	sf::RenderTexture* rTex;
-	void initRTexture();
+	sf::RenderTexture* canvasTex;
+	void InitRTexture();
 
 	sf::Texture* brushTexture;
 
 
 public:
-
+	//Constructor //Destructor
 	CCanvas();
 	~CCanvas();
-	void SetRenderTexture();
+
+	//Accessors
+	void SetCanvasTexture();
+	sf::RectangleShape* GetCanvas();
+
+	//Functions
+	void DrawTexture(sf::Shape*);
+	void DisplayTexture();
 
 };
 
