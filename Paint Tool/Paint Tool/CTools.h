@@ -6,6 +6,7 @@ class CTools
 private:
 
 	sf::CircleShape* circleBrush;
+	sf::RectangleShape* rectBrush;
 	sf::Texture* brushTex;
 
 
@@ -22,6 +23,7 @@ public:
 	void SetBrushTex();
 	void SetBrushPosition(sf::RenderWindow*);
 	void SetLinePoints(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos);
+	void SetRectangle(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos);
 
 
 };

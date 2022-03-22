@@ -1,21 +1,13 @@
 ﻿  CCanvas.cpp
-  CWindow.cpp
   CColorPicker.cpp
   CTools.cpp
-C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(53,52): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(53,41): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=int
-          ]
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(82,18): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  CWindow.cpp
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CWindow.cpp(93,87): warning C4018: '<=': signed/unsigned mismatch
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CWindow.cpp(95,92): warning C4018: '<=': signed/unsigned mismatch
   Main.cpp
   Generating code
-  121 of 121 functions (100.0%) were compiled.
-    120 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  Compiler switch has changed, fall back to full compilation.
+  All 147 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Paint Tool.vcxproj -> C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Release\Paint Tool.exe

@@ -19,6 +19,7 @@ void CTools::InitVariables()
 {
 	this->circleBrush = nullptr;
 	this->brushTex = nullptr;
+	this->rectBrush = nullptr;
 }
 
 void CTools::InitBrush()
@@ -33,7 +34,7 @@ void CTools::InitBrush()
 void CTools::InitBrushTex()
 {
 	this->brushTex = new sf::Texture();
-	this->brushTex->loadFromFile("paintBrush.png");
+	this->brushTex->loadFromFile("paintBrushClear.png");
 }
 
 //Accessors
@@ -50,8 +51,10 @@ void CTools::SetBrushTex()
 void CTools::SetBrushPosition(sf::RenderWindow* _rwindow)
 {
 	sf::Vector2i mousepos = sf::Mouse::getPosition(*_rwindow);
-	this->circleBrush->setPosition(mousepos.x,mousepos.y);
+	this->circleBrush->setPosition((float)mousepos.x,(float)mousepos.y);
 }
+
+
 
 void CTools::SetLinePoints(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos)
 {
@@ -64,7 +67,20 @@ void CTools::SetLinePoints(sf::Vector2i _startmousepos, sf::Vector2i _endmousepo
 
 }
 
+void CTools::SetRectangle(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos)
+{
 
+	//this->rectBrush->setSize(VecDistance(_startmousepos, _endmousepos));
+	
+}
+
+float VecDistance(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos)
+{
+	int dX = _endmousepos.x - _startmousepos.x;
+	int dY = _endmousepos.y - _startmousepos.y;
+
+	return std::sqrt(dX * dX + dY * dY);
+}
 
 
 

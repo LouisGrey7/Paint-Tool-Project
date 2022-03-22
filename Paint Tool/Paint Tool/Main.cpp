@@ -3,7 +3,10 @@
 #include "CWindow.h"
 #include "CCanvas.h"
 #include "CTools.h"
+#include "CColorPicker.h"
 #include "SFML/Graphics.hpp"
+
+
 
     enum class PenMode
     {
@@ -17,32 +20,46 @@
 int main()
 {
 
-    CWindow mainwindow;
+    CWindow mainWindow(sf::Vector2u(1280,720));
+    CWindow colorWindow(sf::Vector2u(256, 277));
     CCanvas canvas;
     CTools tool;
+    CColorPicker colorPicker;
+
 
 
     PenMode currentmode = PenMode::MODE_FREEDRAW;
 
-    while (mainwindow.GetWindowIsOpen())
+    while (mainWindow.GetWindowIsOpen())
     {
 
-        mainwindow.Update();
-        
-        if (mainwindow.GetMouseDown() == true)
+        mainWindow.Update();
+
+        if (colorWindow.GetWindowIsOpen())
+        {
+            colorWindow.UpdateColorEvent(colorPicker.GetImage(), colorPicker.GetColor());
+
+            colorWindow.Clear();
+            colorWindow.DrawShape(colorPicker.GetRectShape());
+            colorWindow.Display();
+        }
+
+
+        if (mainWindow.GetMouseDown() == true)
         {
 
-
+        
         switch (currentmode)
         {
         case PenMode::MODE_FREEDRAW:
-            tool.SetBrushPosition(mainwindow.GetWindow());
+            tool.SetBrushPosition(mainWindow.GetWindow());
+            tool.GetBrush()->setFillColor(*colorPicker.GetColor());
             canvas.DrawTexture(tool.GetBrush());
             canvas.DisplayTexture();
             break;
         case PenMode::MODE_LINE:
-            tool.SetLinePoints(mainwindow.GetStartMousePos(), mainwindow.GetEndMousePos());
-            mainwindow.Draw();
+            tool.SetLinePoints(mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos());
+            //mainwindow.Draw();
             break;
         case PenMode::MODE_RECT:
 
@@ -59,8 +76,8 @@ int main()
 
         canvas.SetCanvasTexture();
         tool.SetBrushTex();
-        mainwindow.Draw(canvas.GetCanvas());
-        mainwindow.Display();
+        mainWindow.DrawShape(canvas.GetCanvas());
+        mainWindow.Display();
 
 
     }
