@@ -57,7 +57,7 @@ sf::RenderWindow* CWindow::GetWindow()
 
 sf::Vector2i CWindow::GetStartMousePos()
 {
-    return sf::Vector2i();
+    return startmousepos;
 }
 
 
@@ -68,7 +68,7 @@ bool CWindow::GetMouseDown()
 
 sf::Vector2i CWindow::GetEndMousePos()
 {
-    return sf::Vector2i();
+    return endmousepos;
 }
 
 

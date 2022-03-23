@@ -48,9 +48,26 @@ sf::RectangleShape* CCanvas::GetCanvas()
 	return canvas;
 }
 
-void CCanvas::DrawTexture(sf::Shape* drawbrush)
+void CCanvas::DrawBrush(sf::Shape* _drawbrush)
 {
-	this->canvasTex->draw(*drawbrush);
+	this->canvasTex->draw(*_drawbrush);
+}
+
+void CCanvas::DrawRectBrush(std::vector<sf::RectangleShape>* _drawrect)
+{
+	//this->canvasTex->draw(*_drawrect);
+}
+
+
+void CCanvas::DrawVertex(sf::VertexArray* _drawvertex)
+{
+	this->canvasTex->draw(*_drawvertex);
+}
+
+void CCanvas::ClearCanvas()
+{
+	this->canvasTex->clear();
+
 }
 
 void CCanvas::DisplayTexture()

@@ -1,5 +1,6 @@
 #pragma once
 #include "CWindow.h"
+#include <vector>
 #include "SFML/Graphics.hpp"
 
 
@@ -29,7 +30,10 @@ public:
 	sf::RectangleShape* GetCanvas();
 
 	//Functions
-	void DrawTexture(sf::Shape*);
+	void DrawBrush(sf::Shape*);
+	void DrawRectBrush(std::vector <sf::RectangleShape>*);
+	void DrawVertex(sf::VertexArray*);
+	void ClearCanvas();
 	void DisplayTexture();
 
 };

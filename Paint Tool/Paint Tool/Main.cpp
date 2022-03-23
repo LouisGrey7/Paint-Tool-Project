@@ -28,7 +28,7 @@ int main()
 
 
 
-    PenMode currentmode = PenMode::MODE_FREEDRAW;
+    PenMode currentmode = PenMode::MODE_RECT;
 
     while (mainWindow.GetWindowIsOpen())
     {
@@ -49,31 +49,40 @@ int main()
         {
 
         
-        switch (currentmode)
-        {
-        case PenMode::MODE_FREEDRAW:
-            tool.SetBrushPosition(mainWindow.GetWindow());
-            tool.GetBrush()->setFillColor(*colorPicker.GetColor());
-            canvas.DrawTexture(tool.GetBrush());
-            canvas.DisplayTexture();
-            break;
-        case PenMode::MODE_LINE:
-            tool.SetLinePoints(mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos());
-            //mainwindow.Draw();
-            break;
-        case PenMode::MODE_RECT:
+            switch (currentmode)
+            {
+            case PenMode::MODE_FREEDRAW:
 
-            break;
-        case PenMode::MODE_CIRCLE:
+                tool.SetBrushPosition(mainWindow.GetWindow());
+                tool.GetBrush()->setFillColor(*colorPicker.GetColor());
+                canvas.DrawBrush(tool.GetBrush());
+                break;
 
-            break;
-        default:
-            break;
+            case PenMode::MODE_LINE:
+
+                tool.GetBrush()->setFillColor(*colorPicker.GetColor());
+                tool.SetLinePoints(mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos());
+                canvas.DrawVertex(tool.GetLineBrush());
+                break;
+
+            case PenMode::MODE_RECT:
+
+                tool.SetRectangle(mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos());
+                tool.GetRectBrush()->setFillColor(*colorPicker.GetColor());
+                canvas.DrawBrush(tool.GetRectBrush());
+
+                break;
+            case PenMode::MODE_CIRCLE:
+
+                break;
+            default:
+                break;
+            }
+
         }
 
-        }
 
-
+        canvas.DisplayTexture();
         canvas.SetCanvasTexture();
         tool.SetBrushTex();
         mainWindow.DrawShape(canvas.GetCanvas());
