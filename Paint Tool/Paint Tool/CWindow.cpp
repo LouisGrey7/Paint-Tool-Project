@@ -26,25 +26,23 @@ void CWindow::InitWindow(sf::Vector2u _size)
 	this->window = new sf::RenderWindow(sf::VideoMode(_size.x,_size.y), "LGPaint", sf::Style::Close | sf::Style::Resize);
 }
 
+
 //Accessors
-
-
 void CWindow::SetxVal(int _xval)
 {
     xVal = _xval;
 }
-
 
 int CWindow::GetxVal()
 {
 	return xVal;
 }
 
-
 void CWindow::SetyVal(int _yval)
 {
     yVal = _yval;
 }
+
 int CWindow::GetyVal()
 {
 	return yVal;
@@ -60,7 +58,6 @@ sf::Vector2i CWindow::GetStartMousePos()
     return startmousepos;
 }
 
-
 bool CWindow::GetMouseDown()
 {
     return mouseDown;
@@ -70,7 +67,6 @@ sf::Vector2i CWindow::GetEndMousePos()
 {
     return endmousepos;
 }
-
 
 void CWindow::SetWindowSize(sf::Vector2u _winsize)
 {
@@ -90,9 +86,9 @@ void CWindow::UpdateColorEvent(sf::Image* _image, sf::Color* _pencolor)
     }
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
-       if (sf::Mouse::getPosition(*window).x > 0 && sf::Mouse::getPosition(*window).x <= _image->getSize().x)
+       if (sf::Mouse::getPosition(*window).x > 0 && sf::Mouse::getPosition(*window).x <= (int)_image->getSize().x)
         {
-            if (sf::Mouse::getPosition(*window).y > 0 && sf::Mouse::getPosition(*window).y <= _image->getSize().y)
+            if (sf::Mouse::getPosition(*window).y > 0 && sf::Mouse::getPosition(*window).y <= (int)_image->getSize().y)
             {
                 *_pencolor = _image->getPixel(sf::Mouse::getPosition(*window).x, sf::Mouse::getPosition(*window).y);
             }
@@ -100,7 +96,6 @@ void CWindow::UpdateColorEvent(sf::Image* _image, sf::Color* _pencolor)
         }
     }
 }
-
 
 const bool CWindow::GetWindowIsOpen()
 {
@@ -113,6 +108,12 @@ void CWindow::SetWindowView(sf::View* _view)
     window->setView(*_view);
 
 }
+
+sf::Event CWindow::GetEvent()
+{
+    return event;
+}
+
 
 //Update // Render // Draw
 void CWindow::Update()
@@ -134,9 +135,24 @@ void CWindow::Update()
             }
             else if (event.type == sf::Event::MouseButtonPressed)
             {
+
+
                 mouseDown = true;
+
+
                 startmousepos = sf::Mouse::getPosition(*window);
+
+                
+                this->currentRectRef = new sf::RectangleShape();
+                this->currentRectRef->setPosition(sf::Vector2f(startmousepos));
+                this->currentRectRef->setSize(sf::Vector2f(3.0f, 3.0f));
+                this->currentRectRef->setFillColor(sf::Color::Red);
+
+                //CTools::GetShapeVec().push_back(currentRectRef);
+                std::cout << "creating";
                 std::cout << "Mouse Down True" << std::endl;
+
+
             }
             else if (event.type == sf::Event::MouseButtonReleased)
             {
@@ -148,7 +164,7 @@ void CWindow::Update()
                 endmousepos = sf::Mouse::getPosition(*window);
                 int mousexVal = sf::Mouse::getPosition(*window).x;
                 int mouseyVal = sf::Mouse::getPosition(*window).y;
-
+                
                 std::cout << "Mouse Position "<< mousexVal << "," << mouseyVal << std::endl;
             }
         
@@ -160,20 +176,30 @@ void CWindow::Clear()
     this->window->clear();
 }
 
-
-
 void CWindow::Display()
 {
     this->window->display();
 }
 
-
-void CWindow::DrawShape(sf::Shape* _drawobject)
+void CWindow::Draw(sf::Drawable* _drawobject)
 {
     this->window->draw(*_drawobject);
+}
+
+sf::RectangleShape* CWindow::GetRectRef()
+{
+    return currentRectRef;
 }
 
 void CWindow::DrawSprite(sf::Sprite* _drawsprite)
 {
     this->window->draw(*_drawsprite);
+}
+
+bool CWindow::HasFocus()
+{
+
+    bool windowhasfocus = window->hasFocus();
+    return windowhasfocus;
+
 }

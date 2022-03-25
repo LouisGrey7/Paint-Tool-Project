@@ -8,6 +8,7 @@ CTools::CTools()
 	InitBrush();
 	InitBrushTex();
 	InitLineBrush();
+	InitRectBrush();
 }
 
 CTools::~CTools()
@@ -44,7 +45,7 @@ void CTools::InitBrushTex()
 
 void CTools::InitRectBrush()
 {
-	//this->rectBrush = new sf::RectangleShape();
+	this->rectBrush = new sf::RectangleShape();
 }
 
 void CTools::InitLineBrush()
@@ -88,24 +89,33 @@ void CTools::SetLinePoints(sf::Vector2i _startmousepos, sf::Vector2i _endmousepo
 
 }
 
-void CTools::SetRectangle(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos)
-{
-	
-	float mousexval = _endmousepos.x;
-	float mouseyval = _endmousepos.y;
-
-	this->rectBrush = new sf::RectangleShape;
-	this->rectBrush->setSize(sf::Vector2f(200, 200));
-	this->rectBrush->setPosition(_endmousepos.x, _endmousepos.y);
-	this->rectBrush->setFillColor(sf::Color::Red);
-	std::vector <sf::RectangleShape> vectorRect(1);
-	vectorRect[0] = *rectBrush;
-	
-}
-
 sf::VertexArray* CTools::GetLineBrush()
 {
 	return lineBrush;
+}
+
+void CTools::SetRectangle(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos, sf::RenderWindow* _window)
+{
+
+	sf::Vector2i pixelPos = sf::Mouse::getPosition(*_window);
+	sf::Vector2f mouseWorldPos = _window->mapPixelToCoords(pixelPos);
+
+	if (_endmousepos.x == 0 && _endmousepos.y == 0)
+	{
+		_endmousepos = sf::Mouse::getPosition(*_window);
+	}
+
+	sf::Vector2f diffVec(0.0f, 0.0f);
+	diffVec.x = _endmousepos.x - _startmousepos.x;
+	diffVec.y = _endmousepos.y - _startmousepos.y;
+
+
+	rectBrush->setSize(diffVec);
+}
+
+std::vector<sf::Shape*> CTools::GetShapeVec()
+{
+	return shapeVec;
 }
 
 float VecDistance(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos)

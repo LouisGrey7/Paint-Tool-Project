@@ -2,6 +2,8 @@
 #include "SFML/Graphics.hpp"
 #include "CCanvas.h"
 #include "CTools.h"
+#include "CUserInt.h"
+#include "CColorPicker.h"
 
 
 class CWindow
@@ -17,6 +19,7 @@ private:
 	sf::Vector2i endmousepos;
 	void InitVariables();
 	void InitWindow(sf::Vector2u);
+	sf::RectangleShape* currentRectRef;
  
 
 public: 
@@ -30,21 +33,25 @@ public:
 	int GetxVal();
 	void SetyVal(int _yval);
 	int GetyVal();
+	sf::Event GetEvent();
 	void SetWindowSize(sf::Vector2u _winsize);
 	void SetWindowView(sf::View*);
-	void UpdateColorEvent(sf::Image* _image, sf::Color* _pencolor);
 	sf::Vector2i GetStartMousePos();
 	sf::Vector2i GetEndMousePos();
 	sf::RenderWindow* GetWindow();
 	bool GetMouseDown();
-
+	sf::RectangleShape* GetRectRef();
 
 	//Update //Render // Draw
 	void Update();
+	void UpdateColorEvent(sf::Image* _image, sf::Color* _pencolor);
 	void Clear();
 	void Display();
-	void DrawShape(sf::Shape*);
+	void Draw(sf::Drawable*);
 	void DrawSprite(sf::Sprite*);
+
+	//Functions
+	bool HasFocus();
 
 };
 

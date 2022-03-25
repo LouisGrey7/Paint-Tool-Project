@@ -53,7 +53,7 @@ void CCanvas::DrawBrush(sf::Shape* _drawbrush)
 	this->canvasTex->draw(*_drawbrush);
 }
 
-void CCanvas::DrawRectBrush(std::vector<sf::RectangleShape>* _drawrect)
+void CCanvas::DrawRectBrush(std::vector<sf::RectangleShape*> _drawrect)
 {
 	//this->canvasTex->draw(*_drawrect);
 }
@@ -74,6 +74,8 @@ void CCanvas::DisplayTexture()
 {
 	this->canvasTex->display();
 }
+
+
 
 
 

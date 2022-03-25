@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CCanvas.cpp" />
+    <ClCompile Include="CUserInt.cpp" />
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="CColorPicker.cpp" />
     <ClCompile Include="CTools.cpp" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCanvas.h" />
+    <ClInclude Include="CUserInt.h" />
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="CColorPicker.h" />
     <ClInclude Include="CTools.h" />

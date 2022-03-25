@@ -4,18 +4,9 @@
 #include "CCanvas.h"
 #include "CTools.h"
 #include "CColorPicker.h"
+#include "CUserInt.h"
 #include "SFML/Graphics.hpp"
 
-
-
-    enum class PenMode
-    {
-        MODE_FREEDRAW,
-        MODE_LINE,
-        MODE_RECT,
-        MODE_CIRCLE
-
-    };
 
 int main()
 {
@@ -24,32 +15,34 @@ int main()
     CWindow colorWindow(sf::Vector2u(256, 277));
     CCanvas canvas;
     CTools tool;
+    CUserInt mainUI;
     CColorPicker colorPicker;
-
-
-
-    PenMode currentmode = PenMode::MODE_RECT;
+    
+    
 
     while (mainWindow.GetWindowIsOpen())
     {
 
         mainWindow.Update();
 
-        if (colorWindow.GetWindowIsOpen())
+        if (colorWindow.GetWindowIsOpen() && colorWindow.HasFocus())
         {
             colorWindow.UpdateColorEvent(colorPicker.GetImage(), colorPicker.GetColor());
 
             colorWindow.Clear();
-            colorWindow.DrawShape(colorPicker.GetRectShape());
+            colorWindow.Draw(colorPicker.GetRectShape());
             colorWindow.Display();
         }
+
 
 
         if (mainWindow.GetMouseDown() == true)
         {
 
-        
-            switch (currentmode)
+        mainUI.UpdateUI(mainWindow.GetWindow());
+            
+
+            switch (mainUI.GetPenMode())
             {
             case PenMode::MODE_FREEDRAW:
 
@@ -65,12 +58,15 @@ int main()
                 canvas.DrawVertex(tool.GetLineBrush());
                 break;
 
+
             case PenMode::MODE_RECT:
-
-                tool.SetRectangle(mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos());
-                tool.GetRectBrush()->setFillColor(*colorPicker.GetColor());
-                canvas.DrawBrush(tool.GetRectBrush());
-
+               
+                    tool.GetRectBrush()->setPosition(sf::Vector2f(mainWindow.GetStartMousePos()));
+                    tool.SetRectangle(mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos(), mainWindow.GetWindow());
+                    tool.GetRectBrush()->setFillColor(*colorPicker.GetColor());
+                    canvas.DrawBrush(tool.GetRectBrush());
+                    
+                
                 break;
             case PenMode::MODE_CIRCLE:
 
@@ -82,10 +78,11 @@ int main()
         }
 
 
-        canvas.DisplayTexture();
         canvas.SetCanvasTexture();
+        canvas.DisplayTexture();
         tool.SetBrushTex();
-        mainWindow.DrawShape(canvas.GetCanvas());
+        mainWindow.Draw(canvas.GetCanvas());
+        mainUI.DrawUIVector(mainWindow.GetWindow());
         mainWindow.Display();
 
 

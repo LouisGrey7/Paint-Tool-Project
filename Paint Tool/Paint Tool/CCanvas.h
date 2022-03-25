@@ -31,10 +31,11 @@ public:
 
 	//Functions
 	void DrawBrush(sf::Shape*);
-	void DrawRectBrush(std::vector <sf::RectangleShape>*);
+	void DrawRectBrush(std::vector <sf::RectangleShape*>);
 	void DrawVertex(sf::VertexArray*);
 	void ClearCanvas();
 	void DisplayTexture();
+	
 
 };
 

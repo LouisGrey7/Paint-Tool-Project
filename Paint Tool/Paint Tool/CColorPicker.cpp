@@ -102,10 +102,5 @@ sf::Color* CColorPicker::GetColor()
     return penColor;
 }
 
-//void CColorPicker::SetColor(sf::RenderWindow* _window)
-//{
-//    penColor = colorImage->getPixel(sf::Mouse::getPosition(*_window).x, sf::Mouse::getPosition(*_window).y);
-//}
-
 
 

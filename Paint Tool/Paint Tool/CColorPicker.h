@@ -30,7 +30,6 @@ public:
     sf::RectangleShape* GetRectShape();
     sf::Sprite* GetSprite();
     sf::Color* GetColor();
-    // void SetColor(sf::RenderWindow*);
     //Functions
     
 
