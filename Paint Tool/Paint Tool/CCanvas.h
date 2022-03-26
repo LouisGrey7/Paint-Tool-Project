@@ -28,11 +28,11 @@ public:
 	//Accessors
 	void SetCanvasTexture();
 	sf::RectangleShape* GetCanvas();
+	sf::RenderTexture* GetCanvasTex();
 
 	//Functions
 	void DrawBrush(sf::Shape*);
-	void DrawRectBrush(std::vector <sf::RectangleShape*>);
-	void DrawVertex(sf::VertexArray*);
+	void DrawShapeVector(std::vector<sf::Shape*> _shapevec);
 	void ClearCanvas();
 	void DisplayTexture();
 	

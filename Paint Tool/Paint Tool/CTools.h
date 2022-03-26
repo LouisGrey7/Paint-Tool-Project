@@ -33,7 +33,8 @@ public:
 	void SetBrushPosition(sf::RenderWindow*);
 	void SetLinePoints(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos);
 	sf::VertexArray* GetLineBrush();
-	void SetRectangle(sf::Vector2i , sf::Vector2i , sf::RenderWindow*);
+	void SetRectangle(sf::RenderTexture*, sf::Vector2f, sf::Vector2i , sf::Vector2i , sf::RenderWindow*, sf::RectangleShape*);
+	void SetCircle(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos, sf::CircleShape*);
 	std::vector<sf::Shape*> GetShapeVec();
 
 

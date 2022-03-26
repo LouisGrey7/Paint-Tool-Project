@@ -45,7 +45,7 @@ void CTools::InitBrushTex()
 
 void CTools::InitRectBrush()
 {
-	this->rectBrush = new sf::RectangleShape();
+	//this->rectBrush = new sf::RectangleShape();
 }
 
 void CTools::InitLineBrush()
@@ -94,7 +94,7 @@ sf::VertexArray* CTools::GetLineBrush()
 	return lineBrush;
 }
 
-void CTools::SetRectangle(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos, sf::RenderWindow* _window)
+void CTools::SetRectangle(sf:: RenderTexture* _rtex, sf::Vector2f _resizediff, sf::Vector2i _startmousepos, sf::Vector2i _endmousepos, sf::RenderWindow* _window, sf::RectangleShape* _rectref)
 {
 
 	sf::Vector2i pixelPos = sf::Mouse::getPosition(*_window);
@@ -105,12 +105,34 @@ void CTools::SetRectangle(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos
 		_endmousepos = sf::Mouse::getPosition(*_window);
 	}
 
+	sf::Vector2f offSetVec;
+	offSetVec.x = pixelPos.x - (_resizediff.x / 2);
+	offSetVec.y = pixelPos.y - (_resizediff.y / 2);
+
+	sf::Vector2f offsetVecOriginalPos;
+	sf::Vector2i pixelPosOriginal = _startmousepos;
+	offsetVecOriginalPos.x = pixelPosOriginal.x - (_resizediff.x / 2);
+	offsetVecOriginalPos.y = pixelPosOriginal.y - (_resizediff.y / 2);
+
+
+
 	sf::Vector2f diffVec(0.0f, 0.0f);
-	diffVec.x = _endmousepos.x - _startmousepos.x;
-	diffVec.y = _endmousepos.y - _startmousepos.y;
+	diffVec.x = offSetVec.x - offsetVecOriginalPos.x;
+	diffVec.y = offSetVec.y - offsetVecOriginalPos.y;
 
 
-	rectBrush->setSize(diffVec);
+	_rectref->setSize(diffVec);
+	
+
+}
+
+void CTools::SetCircle(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos, sf::CircleShape* _circleref)
+{
+	int dX = _endmousepos.x - _startmousepos.x;
+	int dY = _endmousepos.y - _startmousepos.y;
+	float vectordistance = std::sqrt(dX * dX + dY * dY);
+
+	_circleref->setScale(dX,dY);
 }
 
 std::vector<sf::Shape*> CTools::GetShapeVec()
@@ -122,8 +144,8 @@ float VecDistance(sf::Vector2i _startmousepos, sf::Vector2i _endmousepos)
 {
 	int dX = _endmousepos.x - _startmousepos.x;
 	int dY = _endmousepos.y - _startmousepos.y;
-
-	return std::sqrt(dX * dX + dY * dY);
+	float vectordistance = std::sqrt(dX * dX + dY * dY);
+	return vectordistance;
 }
 
 

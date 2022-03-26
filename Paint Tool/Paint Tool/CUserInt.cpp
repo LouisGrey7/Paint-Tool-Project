@@ -53,6 +53,7 @@ void CUserInt::InitUI()
 
 void CUserInt::UpdateUI(sf::RenderWindow* _window)
 {
+	//currentmode = PenMode::MODE_CIRCLE;
 	for (int i = 0; i < uiElementVector.size(); i++)
 	{
 		if (uiElementVector[i]->getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(*_window))))
@@ -63,8 +64,13 @@ void CUserInt::UpdateUI(sf::RenderWindow* _window)
 			}
 			else if (currentmode == PenMode::MODE_RECT)
 			{
+				currentmode = PenMode::MODE_CIRCLE;
+			}
+			else if (currentmode == PenMode::MODE_CIRCLE)
+			{
 				currentmode = PenMode::MODE_FREEDRAW;
 			}
+			
 
 			std::cout << "mouse clicky" << std::endl;
 		}

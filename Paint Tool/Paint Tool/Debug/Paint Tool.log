@@ -1,21 +1,2 @@
-﻿  CTools.cpp
-C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(109,29): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(110,29): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(126,18): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+﻿  Main.cpp
   Paint Tool.vcxproj -> C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Debug\Paint Tool.exe

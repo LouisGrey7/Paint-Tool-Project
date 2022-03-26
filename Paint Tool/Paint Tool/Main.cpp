@@ -18,12 +18,11 @@ int main()
     CUserInt mainUI;
     CColorPicker colorPicker;
     
-    
 
     while (mainWindow.GetWindowIsOpen())
     {
 
-        mainWindow.Update();
+        mainWindow.Update(tool.GetShapeVec(), canvas.GetCanvasTex());
 
         if (colorWindow.GetWindowIsOpen() && colorWindow.HasFocus())
         {
@@ -53,36 +52,39 @@ int main()
 
             case PenMode::MODE_LINE:
 
-                tool.GetBrush()->setFillColor(*colorPicker.GetColor());
-                tool.SetLinePoints(mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos());
-                canvas.DrawVertex(tool.GetLineBrush());
+            
                 break;
-
 
             case PenMode::MODE_RECT:
                
-                    tool.GetRectBrush()->setPosition(sf::Vector2f(mainWindow.GetStartMousePos()));
-                    tool.SetRectangle(mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos(), mainWindow.GetWindow());
-                    tool.GetRectBrush()->setFillColor(*colorPicker.GetColor());
-                    canvas.DrawBrush(tool.GetRectBrush());
-                    
-                
+               
+                tool.SetRectangle(canvas.GetCanvasTex(), mainWindow.GetResizeDiff(), mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos(), mainWindow.GetWindow(), mainWindow.GetRectRef());
+                mainWindow.GetRectRef()->setFillColor(*colorPicker.GetColor());
                 break;
+
             case PenMode::MODE_CIRCLE:
 
+                tool.SetCircle(mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos(), mainWindow.GetCircleRef());
+                mainWindow.GetCircleRef()->setFillColor(*colorPicker.GetColor());
                 break;
+
             default:
                 break;
             }
 
         }
 
-
+        mainWindow.Draw(mainWindow.GetRectRef());
+        mainWindow.DrawVector(tool.GetShapeVec());
         canvas.SetCanvasTexture();
         canvas.DisplayTexture();
         tool.SetBrushTex();
         mainWindow.Draw(canvas.GetCanvas());
         mainUI.DrawUIVector(mainWindow.GetWindow());
+        if (mainWindow.GetMouseDown() == true)
+        {
+            mainWindow.GetWindow()->draw(*mainWindow.GetRectRef());
+        }
         mainWindow.Display();
 
 

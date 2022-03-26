@@ -20,6 +20,10 @@ private:
 	void InitVariables();
 	void InitWindow(sf::Vector2u);
 	sf::RectangleShape* currentRectRef;
+	sf::CircleShape* currentCircleRef;
+	sf::Vector2f initWindowSize;
+	sf::Vector2f resizeDiff;
+	sf::View canvasview;
  
 
 public: 
@@ -41,13 +45,16 @@ public:
 	sf::RenderWindow* GetWindow();
 	bool GetMouseDown();
 	sf::RectangleShape* GetRectRef();
+	sf::CircleShape* GetCircleRef();
+	sf::Vector2f GetResizeDiff();
 
-	//Update //Render // Draw
-	void Update();
+	//Update //Render //Draw
+	void Update(std::vector<sf::Shape*>, sf::RenderTexture*);
 	void UpdateColorEvent(sf::Image* _image, sf::Color* _pencolor);
 	void Clear();
 	void Display();
 	void Draw(sf::Drawable*);
+	void DrawVector(std::vector<sf::Shape*>);
 	void DrawSprite(sf::Sprite*);
 
 	//Functions
