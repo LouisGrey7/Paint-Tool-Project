@@ -21,6 +21,7 @@ CWindow::~CWindow()
 void CWindow::InitVariables()
 {
 	this->window = nullptr;
+    penthickness = 1;
 
     this->canvasview.reset(sf::FloatRect(0, 0, 1280, 720));
     this->resizeDiff = sf::Vector2f(0, 0);
@@ -30,6 +31,20 @@ void CWindow::InitVariables()
     this->currentRectRef->setPosition(sf::Vector2f(-200, 0));
     this->currentRectRef->setSize(sf::Vector2f(3.0f, 3.0f));
     this->currentRectRef->setFillColor(sf::Color::White);
+
+    this->currentCircleRef = new sf::CircleShape();
+    this->currentCircleRef->setOrigin(currentCircleRef->getRadius(), currentCircleRef->getRadius());
+    this->currentCircleRef->setPosition(sf::Vector2f(-200,0));
+    this->currentCircleRef->setRadius(0.5f);
+    this->currentCircleRef->setFillColor(sf::Color::White);
+
+    this->currentLineRef = new sf::RectangleShape();
+    this->currentLineRef->setSize(sf::Vector2f(1, 10));
+    this->currentLineRef->setPosition(sf::Vector2f(-200,0));
+    this->currentLineRef->setFillColor(sf::Color::White);
+
+
+    
 }
 
 void CWindow::InitWindow(sf::Vector2u _size)
@@ -93,7 +108,6 @@ void CWindow::UpdateColorEvent(sf::Image* _image, sf::Color* _pencolor)
            this->window->close();
         }
 
-
     }
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
@@ -107,7 +121,6 @@ void CWindow::UpdateColorEvent(sf::Image* _image, sf::Color* _pencolor)
         }
     }
 }
-
 
 const bool CWindow::GetWindowIsOpen()
 {
@@ -149,34 +162,32 @@ void CWindow::Update(std::vector<sf::Shape*> _shapevec, sf::RenderTexture* _rtex
             }
             else if (event.type == sf::Event::MouseButtonPressed)
             {
-                
-
 
                 mouseDown = true;
 
                 startmousepos = sf::Mouse::getPosition(*window);
-                currentRectRef->setPosition(sf::Vector2f(sf::Mouse::getPosition(*window)));
+                this->currentRectRef->setPosition(sf::Vector2f(sf::Mouse::getPosition(*window)));
 
+                this->currentCircleRef->setPosition(sf::Vector2f(sf::Mouse::getPosition(*window)));
 
-                this->currentCircleRef = new sf::CircleShape();
-                this->currentCircleRef->setOrigin(currentCircleRef->getRadius(), currentCircleRef->getRadius());
-                this->currentCircleRef->setPosition(sf::Vector2f(startmousepos));
-                this->currentCircleRef->setRadius(0.5f);
-                this->currentCircleRef->setFillColor(sf::Color::White);
+                this->currentLineRef->setPosition(sf::Vector2f(sf::Mouse::getPosition(*window)));
+
 
                 std::cout << "creating";
                 std::cout << "Mouse Down True" << std::endl;
-                _shapevec.push_back(currentRectRef);
                 
             }
             else if (event.type == sf::Event::MouseButtonReleased)
             {
 
-                _rtex->draw(*currentRectRef);
-
                 mouseDown = false;
-
+                
+                if (correctpen == 1)
+                _rtex->draw(*currentRectRef);
+                if (correctpen == 2)
                 _rtex->draw(*currentCircleRef);
+                if (correctpen == 3)
+                _rtex->draw(*currentLineRef);
 
                 
                 std::cout << "Mouse Down False" << std::endl;
@@ -190,13 +201,20 @@ void CWindow::Update(std::vector<sf::Shape*> _shapevec, sf::RenderTexture* _rtex
                 
                 std::cout << "Mouse Position "<< mousexVal << "," << mouseyVal << std::endl;
             }
+            else if (event.type == sf::Event::MouseWheelMoved)
+            {
+                if (event.mouseWheel.delta == 1)
+                penthickness++;
+                else if (event.mouseWheel.delta == -1)
+                penthickness--;
+            }
         
     }
 }
 
 void CWindow::Clear()
 {
-    this->window->clear();
+    this->window->clear(sf::Color::White);
 }
 
 void CWindow::Display()
@@ -208,7 +226,6 @@ void CWindow::Draw(sf::Drawable* _drawobject)
 {
     this->window->draw(*_drawobject);
 }
-
 
 void CWindow::DrawVector(std::vector<sf::Shape*> _shapevec)
 {
@@ -238,6 +255,11 @@ sf::Vector2f CWindow::GetResizeDiff()
     return resizeDiff;
 }
 
+sf::RectangleShape* CWindow::GetLineRef()
+{
+    return currentLineRef;
+}
+
 bool CWindow::HasFocus()
 {
 
@@ -245,3 +267,15 @@ bool CWindow::HasFocus()
     return windowhasfocus;
 
 }
+
+void CWindow::SetCurrentPen(int _currentpen)
+{
+    correctpen = _currentpen;
+}
+
+int CWindow::GetPenThickness()
+{
+    return penthickness;
+}
+
+

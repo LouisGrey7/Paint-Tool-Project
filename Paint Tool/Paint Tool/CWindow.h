@@ -21,9 +21,12 @@ private:
 	void InitWindow(sf::Vector2u);
 	sf::RectangleShape* currentRectRef;
 	sf::CircleShape* currentCircleRef;
+	sf::RectangleShape* currentLineRef;
 	sf::Vector2f initWindowSize;
 	sf::Vector2f resizeDiff;
 	sf::View canvasview;
+	int correctpen;
+	float penthickness;
  
 
 public: 
@@ -46,7 +49,10 @@ public:
 	bool GetMouseDown();
 	sf::RectangleShape* GetRectRef();
 	sf::CircleShape* GetCircleRef();
+	sf::RectangleShape* GetLineRef();
 	sf::Vector2f GetResizeDiff();
+	void SetCurrentPen(int _currentpen);
+	int GetPenThickness();
 
 	//Update //Render //Draw
 	void Update(std::vector<sf::Shape*>, sf::RenderTexture*);

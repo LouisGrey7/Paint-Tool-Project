@@ -18,7 +18,7 @@ int main()
     CUserInt mainUI;
     CColorPicker colorPicker;
     
-
+    //Main Paint Loop
     while (mainWindow.GetWindowIsOpen())
     {
 
@@ -34,7 +34,6 @@ int main()
         }
 
 
-
         if (mainWindow.GetMouseDown() == true)
         {
 
@@ -45,27 +44,31 @@ int main()
             {
             case PenMode::MODE_FREEDRAW:
 
-                tool.SetBrushPosition(mainWindow.GetWindow());
+                mainWindow.SetCurrentPen(0);
+                tool.SetFreeDraw(mainWindow.GetWindow(), mainWindow.GetPenThickness());
                 tool.GetBrush()->setFillColor(*colorPicker.GetColor());
                 canvas.DrawBrush(tool.GetBrush());
                 break;
 
-            case PenMode::MODE_LINE:
-
-            
-                break;
-
             case PenMode::MODE_RECT:
-               
-               
+
+                mainWindow.SetCurrentPen(1);
                 tool.SetRectangle(canvas.GetCanvasTex(), mainWindow.GetResizeDiff(), mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos(), mainWindow.GetWindow(), mainWindow.GetRectRef());
                 mainWindow.GetRectRef()->setFillColor(*colorPicker.GetColor());
                 break;
 
             case PenMode::MODE_CIRCLE:
 
+                mainWindow.SetCurrentPen(2);
                 tool.SetCircle(mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos(), mainWindow.GetCircleRef());
                 mainWindow.GetCircleRef()->setFillColor(*colorPicker.GetColor());
+                break;
+
+            case PenMode::MODE_LINE:
+
+                mainWindow.SetCurrentPen(3);
+                tool.SetLine(mainWindow.GetResizeDiff(), mainWindow.GetStartMousePos(), mainWindow.GetEndMousePos(), mainWindow.GetWindow(), mainWindow.GetLineRef(), mainWindow.GetPenThickness());
+                mainWindow.GetLineRef()->setFillColor(*colorPicker.GetColor());
                 break;
 
             default:
@@ -74,8 +77,8 @@ int main()
 
         }
 
-        mainWindow.Draw(mainWindow.GetRectRef());
-        mainWindow.DrawVector(tool.GetShapeVec());
+        //Draw and Display everything
+
         canvas.SetCanvasTexture();
         canvas.DisplayTexture();
         tool.SetBrushTex();
@@ -83,7 +86,12 @@ int main()
         mainUI.DrawUIVector(mainWindow.GetWindow());
         if (mainWindow.GetMouseDown() == true)
         {
+            if (mainUI.GetPenMode() == PenMode::MODE_RECT)
             mainWindow.GetWindow()->draw(*mainWindow.GetRectRef());
+            if (mainUI.GetPenMode() == PenMode::MODE_CIRCLE)
+            mainWindow.GetWindow()->draw(*mainWindow.GetCircleRef());
+            if (mainUI.GetPenMode() == PenMode::MODE_LINE)
+            mainWindow.GetWindow()->draw(*mainWindow.GetLineRef());
         }
         mainWindow.Display();
 

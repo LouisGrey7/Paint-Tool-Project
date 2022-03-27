@@ -1,2 +1,24 @@
-﻿  Main.cpp
+﻿  CTools.cpp
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(62,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(71,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(74,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(74,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(81,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(88,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(89,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(90,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(93,50): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Paint Tool\CTools.cpp(137,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Paint Tool.vcxproj -> C:\Projects\2D Game Programming\Paint Tool Project\Paint-Tool-Project\Paint Tool\Debug\Paint Tool.exe
